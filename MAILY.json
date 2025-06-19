@@ -1,0 +1,246 @@
+{
+  "name": "MAILY",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        160
+      ],
+      "id": "16f50842-a5ee-4c6c-aeb2-1fa0f5df43aa",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        -60
+      ],
+      "id": "3c3fcdf5-88b9-4184-ab99-4f9103e91e68",
+      "name": "Chat Trigger",
+      "webhookId": "80ffab26-b03c-40bb-971f-b12c57b0ef98"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        160
+      ],
+      "id": "14058f0b-0d39-4988-b60d-5c3ea28b52b2",
+      "name": "Groq",
+      "credentials": {
+        "groqApi": {
+          "id": "jLCQ1yY0SLzGvJD8",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "emailType": "text",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        120,
+        160
+      ],
+      "id": "3390b66e-9b3c-45ca-b908-a97f24ba8a35",
+      "name": "Gmail",
+      "webhookId": "b73ebc4a-6e22-470c-a053-9b49ac1fee8d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "sNbdE0l14nyYYsHm",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a helpful assistant\n\nYou must always look the contacts database before setting up an event or sending a mail. You need person's email address before doing the actions.\n\nNever make up someone's email address. Look into contacts database tool.\n\nHere is current date/time : {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -180,
+        -60
+      ],
+      "id": "e27c98c6-56e4-4138-97d2-f72ff84c1194",
+      "name": "MAILY"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "efbvln@gmail.com",
+          "mode": "list",
+          "cachedResultName": "efbvln@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', ``, 'string') }}"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -20,
+        160
+      ],
+      "id": "dd15cd7c-51e6-4ce7-8910-eb654f57414d",
+      "name": "Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "9aX3Qv95LahDizfi",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Gx0bL6kEKyNYO1Xr5cSwlZu4vhGLnQLSnV42yR5KEsg",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Gx0bL6kEKyNYO1Xr5cSwlZu4vhGLnQLSnV42yR5KEsg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Gx0bL6kEKyNYO1Xr5cSwlZu4vhGLnQLSnV42yR5KEsg/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        240,
+        160
+      ],
+      "id": "1f1338b7-953e-4ad8-8da6-119ecddb5453",
+      "name": "Contacts Database",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "oSJNGJYcYP9OB0EU",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "MAILY",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "MAILY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "MAILY",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "MAILY",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MAILY": {
+      "main": [
+        []
+      ]
+    },
+    "Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "MAILY",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacts Database": {
+      "ai_tool": [
+        [
+          {
+            "node": "MAILY",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8255ab54-dd5c-4df8-bbe3-68e27d53a122",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9ad348bfd0160b79d8a0cf5dec47fdfd29905cebee86d612fafd9ab8c2cb31db"
+  },
+  "id": "MOEZ8d0c00AUkK0o",
+  "tags": [
+    {
+      "createdAt": "2025-06-16T11:32:37.186Z",
+      "updatedAt": "2025-06-16T11:32:37.186Z",
+      "id": "Ri6opEoVAbZA9eud",
+      "name": "AI Agent"
+    }
+  ]
+}
