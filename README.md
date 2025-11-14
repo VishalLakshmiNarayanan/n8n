@@ -421,17 +421,3 @@ This project is open source and available under the MIT License.
 
 ---
 
-## Contact
-
-For questions, issues, or collaboration:
-
-- **GitHub Issues**: [Report issues here](#)
-- **n8n Community**: [Join the discussion](https://community.n8n.io/)
-- **Email**: efbvln@gmail.com
-
----
-
-<p align="center">
-  <strong>Built with n8n, powered by AI</strong><br>
-  <em>Making email and calendar management effortless</em>
-</p>
